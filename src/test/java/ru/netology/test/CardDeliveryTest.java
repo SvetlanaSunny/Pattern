@@ -1,11 +1,11 @@
 package ru.netology.test;
-
+import io.qameta.allure.*;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
+import io.qameta.allure.selenide.AllureSelenide;
 import lombok.experimental.UtilityClass;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
 import ru.netology.data.DataGenerator;
 
@@ -21,6 +21,16 @@ import static com.codeborne.selenide.Selenide.open;
 
 
 public class CardDeliveryTest {
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
+    }
+
 
     @Test
     @DisplayName("Should successful plan and replan meeting")
